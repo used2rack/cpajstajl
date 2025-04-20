@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ĆPAJSTAJL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: 'Kode Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      animation: flickerBg 5s infinite alternate;
+    }
+    @keyframes flickerBg {
+      0%, 100% { background: black; }
+      50% { background: #020202; }
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5em;
+      text-shadow: 0 0 10px magenta, 0 0 5px #00ff00;
+      animation: flicker 1.5s infinite alternate;
+    }
+    @keyframes flicker {
+      0% { opacity: 1; }
+      100% { opacity: 0.7; transform: scale(1.01); }
+    }
+    input {
+      background: black;
+      border: 1px solid magenta;
+      color: #00ff00;
+      font-family: 'Kode Mono', monospace;
+      padding: 0.5em;
+      margin-top: 20px;
+      text-align: center;
+      width: 80%;
+    }
+    button {
+      background: magenta;
+      color: black;
+      font-family: 'Kode Mono', monospace;
+      border: none;
+      padding: 0.5em 1em;
+      margin-top: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h1>NIE POWINNO CIĘ TU BYĆ DZIWKO...<br>GRATULACJE</h1>
+  <input id="password" placeholder="Wpisz hasło...">
+  <button onclick="checkPass()">ENTER</button>
+
+  <script>
+    function checkPass() {
+      const pass = document.getElementById("password").value.trim().toLowerCase();
+      const valid = [
+        "to jest mój lifestyle chce go zażyć",
+        "to jest moj lifestyle chce go zazyc"
+      ];
+      if (valid.includes(pass)) {
+        window.location.href = "https://used2rack.github.io/cpajstajl-hidden/cs.html";
+      } else {
+        alert("Niepoprawne hasło.");
+      }
+    }
+  </script>
+</body>
+</html>
