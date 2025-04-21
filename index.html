@@ -29,6 +29,8 @@
       text-align: center;
       text-shadow: 0 0 10px magenta, 0 0 5px #00ff00;
       animation: glitch 1.5s infinite;
+      position: relative;
+      z-index: 2;
     }
     .glitch::before, .glitch::after {
       content: attr(data-text);
@@ -73,6 +75,8 @@
       margin-top: 20px;
       text-align: center;
       width: 80%;
+      position: relative;
+      z-index: 2;
     }
     button {
       background: magenta;
@@ -84,46 +88,13 @@
       cursor: pointer;
       font-weight: bold;
       animation: pulse 1.5s infinite;
+      position: relative;
+      z-index: 2;
     }
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
-    }
-    pre.ascii-art {
-      position: absolute;
-      font-size: 5px;
-      opacity: 0.12;
-      color: #00ff00;
-      white-space: pre;
-      pointer-events: none;
-    }
-    .ascii-top-left {
-      top: 0;
-      left: 0;
-    }
-    .ascii-bottom-right {
-      bottom: 0;
-      right: 0;
-    }
-    .dziwko-spam span {
-      position: absolute;
-      color: magenta;
-      font-size: 10px;
-      opacity: 0.05;
-      animation: scatter 15s infinite linear;
-    }
-    .dziwko-spam {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    @keyframes scatter {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(100vh); }
     }
     .boot-seq {
       position: absolute;
@@ -132,37 +103,66 @@
       font-size: 0.9em;
       white-space: pre-line;
       color: #00ff00;
+      animation: flickBoot 1.4s steps(2, jump-none) infinite;
+      z-index: 2;
+    }
+    @keyframes flickBoot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .ascii-art {
+      font-size: 6px;
+      color: magenta;
+      white-space: pre;
+      opacity: 0.15;
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      animation: pulseArt 2s infinite ease-in-out;
+    }
+    @keyframes pulseArt {
+      0% { opacity: 0.05; }
+      50% { opacity: 0.25; }
+      100% { opacity: 0.05; }
     }
   </style>
 </head>
 <body>
-  <pre class="ascii-art ascii-top-left">
-SZCZUR:
-[ASCII szczura tutaj — wklejony w poprzednich wiadomościach, wytnę dla oszczędzenia miejsca]
+  <pre class="ascii-art">
+        (\__/)
+        (●_●)
+        / >🧠   ASCII SZCZUR | TABLETKA | STRZYKAWKA WKRÓTCE...
   </pre>
-  <pre class="ascii-art ascii-bottom-right">
-TABLETKA:
-[ASCII tabletki tutaj — również wcześniej dostarczony, usunięty z tej wersji do podglądu]
-  </pre>
-
   <h1 class="glitch" data-text="NIE POWINNO CIĘ TU BYĆ DZIWKO.. GRATULACJE">NIE POWINNO CIĘ TU BYĆ DZIWKO.. GRATULACJE</h1>
 
   <input id="password" placeholder="Wpisz hasło...">
   <button onclick="checkPass()">ENTER</button>
 
-  <div class="boot-seq">
-    >> BOOTING NARCOTIC BIOS...<br>
-    >> COOLP INJECTED CNB_BACKDOOR<br>
-    >> SPRAY_PROTOCOL ACTIVE<br>
-    >> INFECTING SYSTEM MEMORY...<br>
-    >> WRITERS FOUND: COOLP, CNB, KONY, CHINĆZYK, CRANKALL, ABRAM<br>
-    >> THROWUPS ENABLED...<br>
-    >> ENTRY PASSWORD REQUIRED
-  </div>
-
-  <div class="dziwko-spam" id="dziwko"></div>
+  <div class="boot-seq" id="bootText"></div>
 
   <script>
+    const bootMessages = [
+      ">> BOOTING NARCOTIC BIOS...",
+      ">> COOLP INJECTED CNB_BACKDOOR",
+      ">> SPRAY_PROTOCOL ACTIVE",
+      ">> INFECTING SYSTEM MEMORY...",
+      ">> WRITERS FOUND: COOLP, CNB, KONY, CHINĆZYK, CRANKALL, ABRAM",
+      ">> THROWUPS ENABLED...",
+      ">> ENTRY PASSWORD REQUIRED"
+    ];
+
+    let currentIndex = 0;
+    const bootEl = document.getElementById("bootText");
+
+    function rotateBootMessages() {
+      bootEl.innerHTML = bootMessages.slice(0, currentIndex + 1).join("<br>");
+      currentIndex = (currentIndex + 1) % bootMessages.length;
+    }
+    setInterval(rotateBootMessages, 1400);
+    rotateBootMessages();
+
     function checkPass() {
       const pass = document.getElementById("password").value.trim().toLowerCase();
       const valid = [
@@ -174,16 +174,6 @@ TABLETKA:
       } else {
         alert("NIEAUTORYZOWANY DOSTĘP - WPROWADŹ POPRAWNE HASŁO");
       }
-    }
-
-    const container = document.getElementById("dziwko");
-    for (let i = 0; i < 150; i++) {
-      const el = document.createElement("span");
-      el.textContent = "DZIWKO";
-      el.style.top = Math.random() * 100 + "%";
-      el.style.left = Math.random() * 100 + "%";
-      el.style.animationDuration = (Math.random() * 12 + 5) + "s";
-      container.appendChild(el);
     }
   </script>
 </body>
