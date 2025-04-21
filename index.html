@@ -90,14 +90,21 @@
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
-    .strzykawka {
+    pre.ascii-art {
       position: absolute;
-      font-size: 6px;
-      color: magenta;
+      font-size: 5px;
+      opacity: 0.12;
+      color: #00ff00;
+      white-space: pre;
+      pointer-events: none;
+    }
+    .ascii-top-left {
       top: 0;
       left: 0;
-      white-space: pre;
-      opacity: 0.3;
+    }
+    .ascii-bottom-right {
+      bottom: 0;
+      right: 0;
     }
     .dziwko-spam span {
       position: absolute;
@@ -129,13 +136,14 @@
   </style>
 </head>
 <body>
-  <div class="strzykawka">
-    @@@@@@@@@@@@@@@@
-    %@@@@@
-    %@@@@@
-    =+++++
-    @@@@@@:::::::
-  </div>
+  <pre class="ascii-art ascii-top-left">
+SZCZUR:
+[ASCII szczura tutaj — wklejony w poprzednich wiadomościach, wytnę dla oszczędzenia miejsca]
+  </pre>
+  <pre class="ascii-art ascii-bottom-right">
+TABLETKA:
+[ASCII tabletki tutaj — również wcześniej dostarczony, usunięty z tej wersji do podglądu]
+  </pre>
 
   <h1 class="glitch" data-text="NIE POWINNO CIĘ TU BYĆ DZIWKO.. GRATULACJE">NIE POWINNO CIĘ TU BYĆ DZIWKO.. GRATULACJE</h1>
 
@@ -168,7 +176,6 @@
       }
     }
 
-    // DZIWKO particles
     const container = document.getElementById("dziwko");
     for (let i = 0; i < 150; i++) {
       const el = document.createElement("span");
