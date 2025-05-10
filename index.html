@@ -12,7 +12,6 @@
       color:#00ff00;
       font-family:'Kode Mono',monospace;
       height:100vh;
-      /* overflow:hidden;  <-- USUNIĘTE, teraz możemy scrollować jeśli ASCII się „wystaje” */
       position:relative;
       animation:bgFlicker 5s infinite alternate;
     }
@@ -88,8 +87,7 @@
       opacity:0.12;
       animation:pulseArt 3s infinite ease-in-out;
       z-index:0;
-      /* overflow:hidden;  <-- USUNIĘTE, żeby nic się nie przycinało */
-      max-width:none;    /* pozwala na pełną szerokość ascii-artu */
+      max-width:none;
     }
     pre.ascii::after {
       content:'';
@@ -135,12 +133,11 @@
 ░           ░   ░ ░  ░    ░                                                             ░        ░ ░ ░ ▒  ░ ░ ░ ▒    ░ ░    ░   ░░       
 ░ ░               ░  ░                                                                  ░ ░          ░ ░      ░ ░      ░  ░  ░           
 ░                         ░                                                             ░                                    ░                                                                                                                                              
- 
   </pre>
 
   <!-- ASCII Rat -->
   <pre class="ascii" style="top:50%; left:50%; transform:translate(-50%,-50%);">
-                                                                                                                                                      
+    <                                                                                                                                                     
                                                                                                                                                       
       ..=%@@@@@@@=:..                                                                                                           .:=@@@@@@@%=..        
      ..             -**%=-                                                                                                :=#**-             .:       
@@ -266,7 +263,7 @@
                                                                      +@: @% .%#                                                                       
                                                                         .**.                                                                          
                                                                                                                                                       
-
+>
   </pre>
 
   <div class="dziwko-spam" id="dziwko"></div>
@@ -320,12 +317,9 @@
     setInterval(rotateBoot,1400);
     rotateBoot();
 
-    // Password check
+  
     function checkPass(){
-      const v=document.getElementById('password').value.trim().toLowerCase();
-      if(['to jest mój lifestyle chce go zażyć','to jest moj lifestyle chce go zazyc'].includes(v)){
-        window.location.href='https://used2rack.github.io/cpajstajl-hidden/cs.html';
-      } else alert('NIEAUTORYZOWANY DOSTĘP - WPROWADŹ POPRAWNE HASŁO');
+      alert('NIE TAK SZYBKO DZIWKO, BĄDŹ CIERPLIWA');
     }
 
     // DZIWKO spam
